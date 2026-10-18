@@ -76,7 +76,8 @@ export function buildBoard(humans: HumanRun[], submissions: Submission[], levels
 
   const humanResults: { playerId: string; levelId: string; moves: number; won: boolean }[] = [];
   for (const run of firstBy(humans, (r) => `${r.playerId}|${r.levelId}`, (r) => r.createdAt)) {
-    const source = `human ${run.playerId} ${run.levelId}`;
+    // No player id here: the board is public.
+    const source = `human run on ${run.levelId}`;
     if (!isActions(run.actions)) {
       rejected.push({ source, reason: 'bad actions' });
       continue;

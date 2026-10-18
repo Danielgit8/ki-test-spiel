@@ -6,3 +6,8 @@ test-results/
 playwright-report/
 .claude/
 public/leaderboard.json
+
+# Interne Notizen, nur lokal
+docs/
+notes/
+Recherche.md

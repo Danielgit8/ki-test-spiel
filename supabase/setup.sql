@@ -1,4 +1,5 @@
--- Runs from the browser game. Anyone may add and read runs, nobody may change or delete them.
+-- Runs from the browser game. The public site may only add runs.
+-- Reading is done by the nightly build with the secret key, so nobody else can list runs.
 create table public.game_runs (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
@@ -12,6 +13,6 @@ create table public.game_runs (
 alter table public.game_runs enable row level security;
 
 create policy "anyone can add a run" on public.game_runs for insert to anon with check (true);
-create policy "anyone can read runs" on public.game_runs for select to anon using (true);
 
-grant select, insert on public.game_runs to anon;
+grant insert on public.game_runs to anon;
+grant select on public.game_runs to service_role;
