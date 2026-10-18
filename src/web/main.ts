@@ -7,6 +7,7 @@ import type { Action, LevelDef, Move } from '../core/types';
 import { Renderer } from './render';
 import { bindInput } from './input';
 import { loadSolved, markSolved } from './progress';
+import { finishAttempt, flush, openAttempt, saveAttempt } from './runs';
 
 const DIRS: Record<Move, [number, number]> = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0], wait: [0, 0] };
 const END_DELAY = 260;
@@ -31,7 +32,7 @@ function firstOpenLevel(): LevelDef {
 }
 
 function start(level: LevelDef): void {
-  session = createSession(level, defaultLimit(level));
+  session = openAttempt(level.id).reduce(apply, createSession(level, defaultLimit(level)));
   overlay.hidden = true;
   onOverlay = null;
   renderer.show(session.state);
@@ -51,7 +52,11 @@ function handle(action: Action): void {
   else renderer.animate(before, session.state, DIRS[action]);
   update();
   const result = status(session);
-  if (result !== 'playing') setTimeout(() => finish(result), END_DELAY);
+  if (result === 'playing') saveAttempt(session.level.id, session.actions);
+  else {
+    finishAttempt(session.level.id, session.actions);
+    setTimeout(() => finish(result), END_DELAY);
+  }
 }
 
 function finish(result: Status): void {
@@ -107,3 +112,4 @@ window.addEventListener('resize', () => renderer.resize());
 
 bindInput(handle, canPlay);
 start(firstOpenLevel());
+void flush();

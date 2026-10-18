@@ -74,6 +74,8 @@ canvas { display: block; border-radius: 12px; touch-action: manipulation; }
 
 .bar { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
 .keys { margin: 0; text-align: center; color: var(--muted); font-size: 14px; }
+.privacy { margin: 0; text-align: center; color: var(--muted); font-size: 13px; }
+a.btn { text-decoration: none; }
 
 .btn {
   font: inherit;

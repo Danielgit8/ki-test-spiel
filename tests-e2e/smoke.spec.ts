@@ -3,6 +3,11 @@ import { test, expect } from '@playwright/test';
 const SOLUTION_1_1 = ['right', 'right', 'right', 'down', 'down'];
 const KEY: Record<string, string> = { up: 'ArrowUp', down: 'ArrowDown', left: 'ArrowLeft', right: 'ArrowRight' };
 
+// Never send test runs to the real database.
+test.beforeEach(async ({ page }) => {
+  await page.route('**/rest/v1/**', (route) => route.fulfill({ status: 201, body: '' }));
+});
+
 test('laptop: level 1-1 can be solved with the keyboard', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#level-id')).toHaveText('1-1');
@@ -19,4 +24,12 @@ test.describe('phone', () => {
     for (const move of SOLUTION_1_1) await page.locator(`.pad [data-action="${move}"]`).click();
     await expect(page.locator('#overlay-title')).toHaveText('Level complete');
   });
+});
+
+test('reloading does not reset the move counter', async ({ page }) => {
+  await page.goto('/');
+  await page.keyboard.press('ArrowRight');
+  await expect(page.locator('#moves')).toHaveText('1 / 25 moves');
+  await page.reload();
+  await expect(page.locator('#moves')).toHaveText('1 / 25 moves');
 });
