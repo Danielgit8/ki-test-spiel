@@ -1,0 +1,17 @@
+{
+  "name": "ki-test-spiel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run --maxWorkers=1",
+    "typecheck": "tsc --noEmit",
+    "play": "tsx src/cli/play.ts",
+    "verify": "tsx src/cli/verify.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}
