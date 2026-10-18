@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Puzzle (working title)</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="hud">
+        <span id="level-id" class="hud-level"></span>
+        <span id="moves" class="hud-moves"></span>
+      </header>
+
+      <div class="stage">
+        <div class="board">
+          <canvas id="board" role="img" aria-label="Puzzle board"></canvas>
+          <div id="overlay" class="overlay" role="dialog" aria-live="polite" hidden>
+            <p id="overlay-title" class="overlay-title"></p>
+            <p id="overlay-sub" class="overlay-sub"></p>
+            <button id="overlay-btn" class="btn primary" type="button"></button>
+          </div>
+        </div>
+        <pre id="ai-view" class="ai-view" aria-label="What the AI sees" hidden></pre>
+      </div>
+
+      <div class="pad" aria-label="Controls">
+        <button class="btn" type="button" data-action="up" aria-label="Up">↑</button>
+        <button class="btn" type="button" data-action="left" aria-label="Left">←</button>
+        <button class="btn" type="button" data-action="wait" aria-label="Wait">·</button>
+        <button class="btn" type="button" data-action="right" aria-label="Right">→</button>
+        <button class="btn" type="button" data-action="down" aria-label="Down">↓</button>
+      </div>
+
+      <nav class="bar">
+        <button class="btn" type="button" data-action="restart">Restart<kbd>R</kbd></button>
+        <button id="toggle-ai" class="btn" type="button" aria-pressed="false">AI view</button>
+        <button id="open-levels" class="btn" type="button">Levels</button>
+      </nav>
+
+      <p class="keys">Arrow keys or WASD to move · Space to wait · R to restart</p>
+
+      <dialog id="levels" aria-labelledby="levels-title">
+        <h2 id="levels-title">World 1</h2>
+        <div id="level-grid" class="level-grid"></div>
+        <button id="close-levels" class="btn" type="button">Close</button>
+      </dialog>
+    </main>
+    <script type="module" src="/src/web/main.ts"></script>
+  </body>
+</html>
