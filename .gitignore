@@ -1,3 +1,7 @@
 node_modules/
 .play-session.json
 runs/
+dist/
+test-results/
+playwright-report/
+.claude/

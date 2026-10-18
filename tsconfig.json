@@ -6,7 +6,15 @@
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
-  "include": ["src", "tests"]
+  "include": [
+    "src",
+    "tests",
+    "tests-e2e",
+    "vite.config.ts",
+    "playwright.config.ts"
+  ]
 }
