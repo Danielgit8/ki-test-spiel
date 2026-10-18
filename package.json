@@ -10,7 +10,8 @@
     "e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "play": "tsx src/cli/play.ts",
-    "verify": "tsx src/cli/verify.ts"
+    "verify": "tsx src/cli/verify.ts",
+    "board": "tsx src/board/cli.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",

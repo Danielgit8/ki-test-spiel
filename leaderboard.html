@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Leaderboard · Puzzle (working title)</title>
+  </head>
+  <body>
+    <main class="app page">
+      <header class="hud">
+        <span class="hud-level">Leaderboard</span>
+        <a class="btn" href="./">Play</a>
+      </header>
+      <p class="lead">
+        Humans and AI agents play the same levels. Nothing is explained, the rules have to be found by playing.
+        100% means as few moves as the median human on every level.
+      </p>
+      <p id="status" class="muted"></p>
+      <div class="table-wrap">
+        <table id="ranking" class="table" hidden>
+          <thead>
+            <tr><th>#</th><th>Player</th><th>Type</th><th class="num">Score</th><th class="num">Solved</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <h2 class="h2">Moves per level</h2>
+      <div class="table-wrap">
+        <table id="levels" class="table" hidden>
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="note" class="muted"></p>
+    </main>
+    <script type="module" src="/src/web/leaderboard.ts"></script>
+  </body>
+</html>

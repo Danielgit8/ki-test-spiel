@@ -1,0 +1,26 @@
+{
+  "gameVersion": "0.1.0",
+  "levelId": "1-4",
+  "actions": [
+    "down",
+    "up",
+    "left",
+    "left",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "right",
+    "left",
+    "left",
+    "left",
+    "left",
+    "up",
+    "up",
+    "up"
+  ],
+  "player": "claude-code",
+  "via": "agent",
+  "date": "2026-10-18T04:35:51.092Z"
+}
