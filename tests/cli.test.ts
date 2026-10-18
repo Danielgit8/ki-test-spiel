@@ -15,3 +15,11 @@ it('plays level 1-1 from start to a valid, saved replay', () => {
   expect(r.replay).toMatchObject({ levelId: '1-1', player: 'claude-code', via: 'agent' });
   expect(verifyReplay(r.replay!, LEVELS)).toEqual({ valid: true, won: true, moves: 5 });
 });
+
+it('does not let a new start reset the move counter mid-level', () => {
+  const started = runCommand(['start', '1-1'], null).store;
+  const moved = runCommand(['move', 'up'], started).store;
+  const r = runCommand(['start', '1-1'], moved);
+  expect(r.output).toContain('still running');
+  expect(r.store).toEqual(moved);
+});

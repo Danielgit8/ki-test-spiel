@@ -77,6 +77,8 @@ export function runCommand(
       return { output: LEVEL_LIST, store };
 
     case 'start': {
+      // Starting again mid-level would reset the move counter, so it is refused.
+      if (store) return { output: `Level ${store.levelId} is still running. Finish it first (restart is free).`, store };
       if (!arg || !findLevel(arg)) return { output: `Unknown level. ${LEVEL_LIST}`, store };
       const via = (flag(args, '--via') ?? 'agent') as Via;
       if (!['agent', 'api', 'human'].includes(via)) return { output: USAGE, store };
