@@ -3,6 +3,9 @@ import { parseLevel } from '../src/core/level';
 import { player, step } from '../src/core/rules';
 import { apply, createSession, status } from '../src/core/session';
 import type { LevelDef } from '../src/core/types';
+import { verifyReplay } from '../src/core/replay';
+import { GAME_VERSION } from '../src/core/version';
+import { LEVELS, findLevel } from '../src/levels';
 
 describe('rules', () => {
   it('a door blocks without a key', () => {
@@ -35,5 +38,24 @@ describe('session', () => {
     expect(s.moves).toBe(1);
     s = apply(s, 'left');
     expect(status(s)).toBe('lost');
+  });
+});
+
+describe('verifyReplay', () => {
+  const run = {
+    gameVersion: GAME_VERSION,
+    levelId: '1-1',
+    player: 'test',
+    via: 'agent' as const,
+    date: '2026-10-18T00:00:00.000Z',
+    actions: findLevel('1-1')!.solution,
+  };
+
+  it('accepts a real winning run', () => {
+    expect(verifyReplay(run, LEVELS)).toEqual({ valid: true, won: true, moves: 5 });
+  });
+
+  it('rejects a run with extra actions after the end', () => {
+    expect(verifyReplay({ ...run, actions: [...run.actions, 'up'] }, LEVELS).valid).toBe(false);
   });
 });
